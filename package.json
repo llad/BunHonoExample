@@ -1,0 +1,16 @@
+{
+  "name": "bun-template",
+  "version": "1.0.0",
+  "author": "",
+  "main": "index.tsx",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "scripts": {
+    "start": "bun run index.tsx",
+    "template:http": "bun ./templates/http.ts"
+  },
+  "dependencies": {
+    "hono": "^2.2.5"
+  }
+}
