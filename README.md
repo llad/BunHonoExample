@@ -1,9 +1,5 @@
-# Bun
-Start editing the <code>index.ts</code> file. We also, provided you with a <code>/templates/</code> folder.
+# Bun, Hono, hmm
+This is really more of an experiment but with a goal of being an example.
 
-You can run the <code>index.ts</code> file by typing `bun index.ts`
+I wanted to learn something about Bun. Then I found Hono, and so wanted to learn that.
 
-
----
-
-Please note, installing packages. Use, the package tab or type `npm install <package>@<version>`
