@@ -11,7 +11,7 @@ db.run("CREATE TABLE IF NOT EXISTS requests (id INTEGER PRIMARY KEY AUTOINCREMEN
 
 const app = new Hono()
 
-// middleware
+// middleware test
 
 app.use('*', async (c, next) => {
   console.log(`[${c.req.method}] ${c.req.url}`)
