@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
-		pkgs.cowsay
+		pkgs.sqlite.bin
+  pkgs.cowsay
 		pkgs.unzip
 		pkgs.vim
     pkgs.yarn
