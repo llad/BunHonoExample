@@ -7,7 +7,7 @@ import {
 } from './html'
 
 const db = new Database("mydb.sqlite");
-db.run("CREATE TABLE IF NOT EXISTS requests (id INTEGER PRIMARY KEY AUTOINCREMENT, request TEXT)")
+db.run("CREATE TABLE IF NOT EXISTS requests (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT, method TEXT, created DATETIME DEFAULT CURRENT_TIMESTAMP)")
 
 const app = new Hono()
 
@@ -15,8 +15,9 @@ const app = new Hono()
 
 app.use('*', async (c, next) => {
   console.log(`[${c.req.method}] ${c.req.url}`)
+  console.log(JSON.stringify(c.req.url))
   
-  db.run("INSERT INTO requests (request) VALUES (?)", c.req.url)
+  db.run("INSERT INTO requests (method, url) VALUES (?, ?)", c.req.method, c.req.url)
   await next()
 })
 
@@ -26,7 +27,9 @@ app.get('/', (c) => {
   const latestRequest = (db.query("SELECT * FROM requests ORDER BY id DESC").get())
  const props = {
     id: latestRequest.id,
+   method: latestRequest.method,
     request: latestRequest.request,
+   created: latestRequest.created,
     siteData: {
       title: 'home',
     },
@@ -48,10 +51,9 @@ app.get('/requests', (c) => {
 
 app.get('/requests/:id', (c) => {
   const id = c.req.param('id')
-  const latestRequest = (db.query("SELECT * FROM requests WHERE id = ?").get(id))
+  const request = (db.query("SELECT * FROM requests WHERE id = ?").get(id))
   const props = {
-    id: latestRequest.id,
-    request: latestRequest.request,
+    request: request,
     siteData: {
       title: 'request by id',
     },
